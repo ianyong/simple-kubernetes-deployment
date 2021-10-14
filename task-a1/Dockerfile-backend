@@ -17,9 +17,12 @@ RUN make buildutils
 # Base image for final image
 FROM alpine:3.14
 
-# Copy executable from build stage
+# Install dependencies for running Bash scripts
+RUN apk add --no-cache bash libc6-compat
+
+# Copy executables from build stage
 WORKDIR /backend
-COPY --from=build /source/bin/server .
+COPY --from=build /source/bin/ .
 
 # Add a script to be executed every time the container starts
 COPY entrypoint-scripts/backend.sh /usr/bin/
