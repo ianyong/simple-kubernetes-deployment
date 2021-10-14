@@ -31,7 +31,7 @@ services:
       - '8000'
     environment:
       GO_ENV: production
-      PORT: 8000
+      SERVER_PORT: 8000
       DB_HOST: todo-database
       DB_PORT: ${DB_PORT}
       DB_NAME: ${DB_NAME}
