@@ -21,6 +21,16 @@ FROM nginx:1.21
 WORKDIR /frontend
 COPY --from=build /source/build .
 
+# Delete NGINX defaults
+RUN rm -f /etc/nginx/conf.d/* /etc/nginx/sites-enabled/*
+
+# Copy NGINX configuration
+COPY nginx/nginx.conf /etc/nginx
+COPY nginx/sites-enabled/* /etc/nginx/sites-enabled/
+
+# Copy template file for environment variable substitution
+COPY env.template.js .
+
 # Add a script to be executed every time the container starts
 COPY entrypoint-scripts/frontend.sh /usr/bin/
 RUN chmod +x /usr/bin/frontend.sh
