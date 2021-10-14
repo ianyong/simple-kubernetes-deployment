@@ -1,0 +1,30 @@
+# To build a Docker image from this file, run:
+# docker build -f Dockerfile-backend -t todo-backend .
+
+# Base image for build stage
+FROM golang:1.17 AS build
+
+# Copy source code into build container
+WORKDIR /source
+COPY todo-backend .
+
+# Build the application
+RUN make build
+
+# Base image for final image
+FROM alpine:3.14
+
+# Copy executable from build stage
+WORKDIR /backend
+COPY --from=build /source/bin/server .
+
+# Add a script to be executed every time the container starts
+COPY entrypoint-scripts/backend.sh /usr/bin/
+RUN chmod +x /usr/bin/backend.sh
+ENTRYPOINT ["backend.sh"]
+
+# Expose port 8000
+EXPOSE 8000
+
+# Default command
+CMD ["sh", "-c", "./server"]
