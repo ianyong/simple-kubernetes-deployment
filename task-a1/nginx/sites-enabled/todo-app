@@ -1,5 +1,6 @@
 server {
-  listen 80;
+  listen 80 default_server;
+  server_name _;
   root /frontend;
   index index.html;
 
@@ -18,11 +19,4 @@ server {
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto $scheme;
   }
-}
-
-# Catch-all for unrecognised requests
-server {
-  listen 80 default_server;
-  server_name _;
-  return 444;
 }
