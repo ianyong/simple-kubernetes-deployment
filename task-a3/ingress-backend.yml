@@ -12,9 +12,9 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: todo-frontend
+      name: todo-backend
       port:
-        number: 80
+        number: 8000
   rules:
   - host: todo.cs3219.com
     http:
@@ -23,6 +23,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: todo-frontend
+            name: todo-backend
             port:
-              number: 80
+              number: 8000
