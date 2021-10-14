@@ -19,6 +19,9 @@ services:
 
   backend:
     image: todo-backend:latest
+    build:
+      context: .
+      dockerfile: Dockerfile-backend
     container_name: todo-backend
     restart: always
     depends_on:
@@ -41,6 +44,9 @@ services:
 
   frontend:
     image: todo-frontend:latest
+    build:
+      context: .
+      dockerfile: Dockerfile-frontend
     container_name: todo-frontend
     restart: always
     depends_on:
