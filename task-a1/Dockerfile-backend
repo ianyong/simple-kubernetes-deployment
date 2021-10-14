@@ -11,6 +11,9 @@ COPY todo-backend .
 # Build the application
 RUN make build
 
+# Build the database utility applications
+RUN make buildutils
+
 # Base image for final image
 FROM alpine:3.14
 
