@@ -19,7 +19,7 @@ Note that this makes use of the Todo application created for OTOT Task B:
 1. Make a copy of `.env.template` as `.env`, then specify the `DB_USER` and `DB_PASSWORD`.
 1. Start the Docker containers. The Docker Compose configuration is configured to build the backend and frontend Docker images if necessary.
    ```sh
-   $ docker-compose up
+   docker-compose up
    ```
    * Note that a volume will be created at `./db_data` in order to persist the database across runs.
 1. Navigate to http://localhost in a web browser to access the application.

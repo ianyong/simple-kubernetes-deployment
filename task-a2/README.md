@@ -27,39 +27,39 @@ However, the images have been pre-built and pushed to GitHub's container registr
 1. Make a copy of `secrets.template.yml` as `secrets.yml`, then specify the `DB_USER` and `DB_PASSWORD`.
 1. Create the `cs3219-otot-a` namespace. This is so as to ensure that all of the objects associated with this project are isolated from that of other projects.
    ```sh
-   $ kubectl apply -f namespace.yml
+   kubectl apply -f namespace.yml
    ```
 1. Create the secrets that will be used in the deployments.
    ```sh
-   $ kubectl apply -f secrets.yml
+   kubectl apply -f secrets.yml
    ```
 1. Create the database `StatefulSet`.
    ```sh
-   $ kubectl apply -f db-statefulset.yml
+   kubectl apply -f db-statefulset.yml
    ```
 1. Create the database `Service`.
    ```sh
-   $ kubectl apply -f db-service.yml
+   kubectl apply -f db-service.yml
    ```
 1. Create the backend `Deployment`.
    ```sh
-   $ kubectl apply -f backend-deployment.yml
+   kubectl apply -f backend-deployment.yml
    ```
 1. Create the backend `Service`.
    ```sh
-   $ kubectl apply -f backend-service.yml
+   kubectl apply -f backend-service.yml
    ```
 1. Create the frontend `Deployment`.
    ```sh
-   $ kubectl apply -f frontend-deployment.yml
+   kubectl apply -f frontend-deployment.yml
    ```
 1. Create the frontend `Service`.
    ```sh
-   $ kubectl apply -f frontend-service.yml
+   kubectl apply -f frontend-service.yml
    ```
 1. At this point, the entire Kubernetes cluster has been set up. To check that everything is okay, run:
    ```sh
-   $ kubectl -n cs3219-otot-a get all
+   kubectl -n cs3219-otot-a get all
    ```
    The output should look something like:
    <p align="center">
@@ -67,6 +67,6 @@ However, the images have been pre-built and pushed to GitHub's container registr
    </p>
 1. In order to access the web application that is running in our Kubernetes cluster, we will forward the local port `3219` to port `80` on `service/todo-frontend`.
    ```sh
-   $ kubectl -n cs3219-otot-a port-forward service/todo-frontend 3219:80
+   kubectl -n cs3219-otot-a port-forward service/todo-frontend 3219:80
    ```
 1. Navigate to http://localhost:3219 in a web browser to access the application.

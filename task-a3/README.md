@@ -22,23 +22,23 @@ However, the images have been pre-built and pushed to GitHub's container registr
 
 1. If you are using minikube, enable the NGINX ingress controller.
    ```sh
-   $ minikube addons enable ingress
+   minikube addons enable ingress
    ```
 1. Update the frontend `Deployment` with a new value for `BASE_SERVER_URL`.
    ```sh
-   $ kubectl apply -f frontend-deployment-updated.yml
+   kubectl apply -f frontend-deployment-updated.yml
    ```
 1. Update the frontend `Service` type from `LoadBalancer` to `ClusterIP`. This is because the ingress controller will act as the load balancer as well as the entrypoint for all external requests.
    ```sh
-   $ kubectl apply -f frontend-service-updated.yml
+   kubectl apply -f frontend-service-updated.yml
    ```
 1. Create the ingress controller.
    ```sh
-   $ kubectl apply -f ingress.yml
+   kubectl apply -f ingress.yml
    ```
 1. To verify that the ingress controller is working, run:
    ```sh
-   $ kubectl -n cs3219-otot-a describe ingress todo-ingress
+   kubectl -n cs3219-otot-a describe ingress todo-ingress
    ```
    The output should look something like:
    <p align="center">
