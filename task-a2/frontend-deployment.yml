@@ -19,3 +19,8 @@ spec:
         env:
         - name: BASE_SERVER_URL
           value: http://localhost:3219/api/v1
+        resources:
+          limits:
+            cpu: 50m
+          requests:
+            cpu: 20m
