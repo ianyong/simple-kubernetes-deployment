@@ -78,3 +78,42 @@ As such, which backend pod serves the request can change.
 1. Navigate to http://todo.cs3219.com/api/v1/hostname in a web browser or an API testing tool such as Postman.
 1. Keep making calls to the `/api/v1/hostname` endpoint. The hostname displayed should remain the same throughout.
 1. Now, delete the cookie from your browser's storage and make another call to the endpoint. Since we have 3 replicas of the backend, there is a 66% chance that the hostname will change.
+
+## Setting up Horizontal Pod Auto-scaler
+
+**If you overwrote the original ingress controller in order to verify that sticky sessions works, please re-apply the original ingress controller.**
+```sh
+kubectl apply -f ingress.yml
+```
+
+1. Enable the metrics server.
+   ```sh
+   kubectl apply -f metrics-server.yml
+   ```
+1. Create the horizontal pod auto-scaler.
+   ```sh
+   kubectl apply -f horizontal-pod-autoscaler.yml
+   ```
+1. To verify that the auto-scaler is working, run:
+   ```sh
+   kubectl -n cs3219-otot-a get hpa todo-frontend
+   ```
+   The output should look something like:
+   <p align="center">
+     <img src="assets/kubernetes_hpa_no_load.png">
+   </p>
+
+## Verifying Horizontal Pod Auto-Scaling
+
+1. Start watching the load of the auto-scaler.
+   ```sh
+   kubectl -n cs3219-otot-a get hpa todo-frontend --watch
+   ```
+1. In order to see how the auto-scaler reacts to increasing load, we will send an infinite loop of requests to the application in another terminal.
+   ```sh
+   while true; do curl --silent todo.cs3219.com > /dev/null; done
+   ```
+1. The auto-scaler will automatically resize the deployment. For example:
+   <p align="center">
+     <img src="assets/kubernetes_hpa_autoscale.png">
+   </p>
