@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: cs3219-otot-a
+  name: todo-frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: todo-frontend
+  template:
+    metadata:
+      labels:
+        app: todo-frontend
+    spec:
+      containers:
+      - name: todo-frontend
+        image: ghcr.io/ianyong/todo-frontend:1.0.0
+        env:
+        - name: BASE_SERVER_URL
+          value: http://todo.cs3219.com/api/v1
