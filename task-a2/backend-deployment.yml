@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: cs3219-otot-a
+  name: todo-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: todo-backend
+  template:
+    metadata:
+      labels:
+        app: todo-backend
+    spec:
+      containers:
+      - name: todo-backend
+        image: ghcr.io/ianyong/todo-backend:1.0.0
+        env:
+        - name: GO_ENV
+          value: production
+        - name: SERVER_PORT
+          value: '8000'
+        - name: DB_HOST
+          value: todo-database
+        - name: DB_PORT
+          value: '5432'
+        - name: DB_NAME
+          value: todo_production
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: secrets
+              key: DB_USER
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: secrets
+              key: DB_PASSWORD
+        - name: DB_SSLMODE
+          value: disable
