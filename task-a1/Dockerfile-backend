@@ -24,6 +24,10 @@ RUN apk add --no-cache bash libc6-compat
 WORKDIR /backend
 COPY --from=build /source/bin/ .
 
+# Copy migration files
+RUN mkdir --parents ./migrations
+COPY --from=build /source/migrations ./migrations
+
 # Add a script to be executed every time the container starts
 COPY entrypoint-scripts/backend.sh /usr/bin/
 RUN chmod +x /usr/bin/backend.sh
