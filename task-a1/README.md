@@ -22,4 +22,4 @@ Note that this makes use of the Todo application created for OTOT Task B:
    $ docker-compose up
    ```
    * Note that a volume will be created at `./db_data` in order to persist the database across runs.
-1. Navigate to [http://localhost](http://localhost) on a web browser.
+1. Navigate to http://localhost in a web browser to access the application.
